@@ -1,7 +1,7 @@
 # Aitlhaj_Myriam_2_dossier_code_092023
 Dossier : géré via GitHub
 
-Notebook : https://www.kaggle.com/code/myriamaitlhaj/notebook-projet7
+Notebook : https://www.kaggle.com/code/myriamaitlhaj/notebook-projet7 --- NOTEBOOK AVEC OUTPUTS
 
 API : https://flask-proj7.onrender.com/
 
