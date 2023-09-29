@@ -1,9 +1,7 @@
-"""import shap"""
 import shap
 import streamlit as st
 
-
-# Informations demandes passées
+# Informations demandes archivées
 def general(data_train, var_descriptions, data_test, shap_values):
     """Informations générales"""
     st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -13,6 +11,7 @@ def general(data_train, var_descriptions, data_test, shap_values):
 
     st.text("Echantillon des informations utilisées")
     st.table(data_train)
+    # Définition de chaque feature AVANT ENCODAGE
     st.text("Descriptions des colonnes")
     if st.checkbox("Montrer la description des colonnes :eyes:"):
         rows = var_descriptions.sort_values(by='Row')
@@ -27,7 +26,7 @@ def general(data_train, var_descriptions, data_test, shap_values):
         st.image('static/pie_chart.png')
 
     st.subheader("Interprétabilité du modèle : SHAP")
-
+    # summary_plot interactif
     st.text("Impacts des variables sur la prédiction")
     if st.checkbox("Montrer l'impact des variables les plus importantes :eyes:"):
         st.write("""
