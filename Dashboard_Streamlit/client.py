@@ -1,15 +1,14 @@
-"""import requests"""
 import requests
 import shap
 import streamlit as st
 import matplotlib.pyplot as plt
 from io import BytesIO
 
-
 def client(app_test, shap_values, shap_explainer):
     """Informations relatives à un client"""
     st.title("Informations client")
     url = "https://flask-proj7.onrender.com"
+    # FREE TIER : l'API Flask sur Render s'endort au bout de 15 minutes d'inactivité : timout=210
     response = requests.get(url + "/possible_input", timeout=210).json()
     list_client_id = response['possible_client_ID']
     left, right = st.columns(2)
@@ -20,12 +19,12 @@ def client(app_test, shap_values, shap_explainer):
     st.write(":tada:  Client identifié   :   ", client_id)
     
     st.subheader("Données et score de prédiction")
-
+    # Données personnelles
     st.text("Informations client")
     if st.checkbox("Montrer les informations :eyes:"):
         client_infos = app_test.loc[app_test['SK_ID_CURR']==client_id]
         st.dataframe(client_infos)
-    
+    # Affichage du score
     st.text("Score et prédiction")
     if st.checkbox("Montrer la prédiction :eyes:"):
         st.write("""
@@ -67,7 +66,7 @@ def client(app_test, shap_values, shap_explainer):
             r2.write(f":green[**{pred1}**]")
 
     st.subheader("Interprétation du score")
-
+    # force_plot non interactif
     st.text("Valeurs SHAP")
     if st.checkbox("Montrer l'impact des variables sur le score :eyes:"):
         st.write("""
@@ -101,13 +100,5 @@ def client(app_test, shap_values, shap_explainer):
         buf = BytesIO()
         fig.savefig(buf, format="png")
         st.image(buf)
-
-        """
-        dependence_plot = shap.dependence_plot(X,
-                                               shap_values[0],
-                                               data,
-                                               interaction_index=Y)
-        st.pyplot(dependence_plot)
-        """
         
 # End of file
