@@ -1,4 +1,3 @@
-"""import streamlit"""
 import pickle
 import streamlit as st
 import pandas as pd
@@ -9,9 +8,8 @@ import client
 
 st.set_page_config(layout="wide", page_title='Dashboard Projet 7')
 
-
 @st.cache_data(persist=True)
-def load_data():
+def load_data(): # A cause de la limite de taille sur GitHub, certains fichiers ont été importés en morceaux puis réassemblés ici
     """Cache : pas besoin d'exécuter load_data() à chaque reload"""
     application1 = pd.read_csv('static/app_test1.csv')
     application2 = pd.read_csv('static/app_test2.csv')
@@ -22,7 +20,7 @@ def load_data():
     for col in past_application.columns:
         if past_application[col].max() == 1:
             past_application[col] = past_application[col].astype(int)
-
+            
     description = pd.read_csv('static/HomeCredit_columns_description.csv',
                               encoding='unicode_escape')
     with open('static/shap_explainer_lgbm.p', 'rb') as file:
@@ -62,7 +60,7 @@ def main():
         client.client(applications, shap_values, shap_explainer)
 
 
-# Initialization
+# Initialization du Nom d'utilisateur, mot de passe et loginOK
 if 'user' not in st.session_state:
     st.session_state.user = ''
 if 'password' not in st.session_state:
@@ -70,6 +68,7 @@ if 'password' not in st.session_state:
 if 'loginOK' not in st.session_state:
     st.session_state.loginOK = False
 
+# Page d'authentification : n'importe quel nom d'utilisateur peut être donné
 if ~st.session_state.loginOK:
     user_placeholder = st.empty()
     pwd_placeholder = st.empty()
@@ -79,6 +78,7 @@ if ~st.session_state.loginOK:
     pwd = pwd_placeholder.text_input(
         "Mot de passe:", value="", type="password")
     st.session_state.password = pwd
+    # Si mot de passe = mdp : accès à la page d'acceuil
     if st.session_state.password == 'mdp':
         st.session_state.loginOK = True
         user_placeholder.empty()
