@@ -7,20 +7,23 @@ app = Flask(__name__)
 
 with open('static/LGBM_final.pkl', 'rb') as file:
     lgbm = pickle.load(file)
-
+    
+# Liste des clients avec unde demande de prêt en cours
 app_test = pd.read_csv('static/app_test.csv')
 client_ID = list(app_test.SK_ID_CURR)
 
-@app.route('/') # / = No endpoint : local url
+# Page de demande d'input : entrer un client ID et appuyer sur un outon "predict"
+@app.route('/') # / = No endpoint
 def index():
     return render_template('index.html')
 
+# Affichage de la liste des clients précédente
 @app.route('/possible_input/')
 def possible_input():
     return jsonify({"model": "LGBM optimise",
                     "possible_client_ID" : client_ID})
 
-
+# Affichage de la prédiction, la probabilité et la prédiction ajustée par seuil
 @app.route('/predict/<int:sk_id>')
 def predict_get(sk_id):
     if sk_id in client_ID:
@@ -38,6 +41,7 @@ def predict_get(sk_id):
                     'prediction_initiale': str(predict_init),
                     'probabilite_refus': str(predict_proba)})
 
+# Même chose mais atteignable via la page principale (demande d'input)
 @app.route('/predict/', methods=['GET', 'POST'])
 def predict_get1():
     sk_id = request.form.get('sk_id', type=int)
@@ -56,6 +60,6 @@ def predict_get1():
                     'prediction_initiale': str(predict_init),
                     'probabilite_refus': str(predict_proba)})
 
-
+# En production via waitress
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8080)
