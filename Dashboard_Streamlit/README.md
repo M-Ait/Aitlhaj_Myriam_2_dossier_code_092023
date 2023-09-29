@@ -1,9 +1,9 @@
-#Fichier introductif pour le Dashboard
+# Fichier introductif pour le Dashboard
 
-  ##Objectif : 
+  ## Objectif : 
   Permet de visualiser les données, le score renvoyé par l'API Flask et l’interprétation de ce score.
   
-  ##Découpage des dossiers : 
+  ## Découpage des dossiers : 
         - requirements.txt : fichier listant les packages utilisés
         - streamlit_app.py : Script principal de l'application Streamlit avec page d'authentification, récupération des données,
                              boutons d'appel des différentes pages
