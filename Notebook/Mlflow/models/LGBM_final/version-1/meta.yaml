@@ -1,0 +1,13 @@
+aliases: []
+creation_timestamp: 1696114767020
+current_stage: Production
+description: ''
+last_updated_timestamp: 1696114801430
+name: LGBM_final
+run_id: ed24166755424dbe98199b9daba29d54
+run_link: ''
+source: file:///c:/Users/myria/Deploy_Proj7/mlruns/0/ed24166755424dbe98199b9daba29d54/artifacts/model
+status: READY
+status_message: null
+user_id: null
+version: 1
