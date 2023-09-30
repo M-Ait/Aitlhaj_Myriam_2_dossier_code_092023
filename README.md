@@ -10,4 +10,4 @@ Le tracking des modèles à été fait en local sur Visual Studio Code.
 API : https://flask-proj7.onrender.com/
 
 
-Dashboard : https://dashboard-proj7-myrait.streamlit.app/
+Dashboard : https://dashboard-proj7-myrait.streamlit.app/ --- Mot de passe = mdp
